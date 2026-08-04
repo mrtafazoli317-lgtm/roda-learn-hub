@@ -51,7 +51,10 @@ function Profile() {
       .from("profiles")
       .upsert({ id: user.id, full_name: fullName.trim().slice(0, 100) });
     setSaving(false);
-    if (error) return toast.error("ذخیره نشد");
+    if (error) {
+      toast.error("ذخیره نشد");
+      return;
+    }
     toast.success("اطلاعات ذخیره شد");
   }
 

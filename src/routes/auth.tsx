@@ -42,11 +42,17 @@ function AuthPage() {
   async function signIn(e: React.FormEvent) {
     e.preventDefault();
     const parsed = credsSchema.safeParse({ email, password });
-    if (!parsed.success) return toast.error(parsed.error.issues[0]!.message);
+    if (!parsed.success) {
+      toast.error(parsed.error.issues[0]!.message);
+      return;
+    }
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword(parsed.data);
     setBusy(false);
-    if (error) return toast.error("ایمیل یا رمز عبور اشتباه است");
+    if (error) {
+      toast.error("ایمیل یا رمز عبور اشتباه است");
+      return;
+    }
     toast.success("خوش آمدید");
     navigate({ to: "/profile" });
   }
@@ -54,7 +60,10 @@ function AuthPage() {
   async function signUp(e: React.FormEvent) {
     e.preventDefault();
     const parsed = credsSchema.safeParse({ email, password });
-    if (!parsed.success) return toast.error(parsed.error.issues[0]!.message);
+    if (!parsed.success) {
+      toast.error(parsed.error.issues[0]!.message);
+      return;
+    }
     setBusy(true);
     const { data, error } = await supabase.auth.signUp({
       ...parsed.data,
@@ -64,7 +73,10 @@ function AuthPage() {
       },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     if (!data.session) {
       toast.success("ثبت‌نام انجام شد. لینک تأیید به ایمیل شما ارسال شد.");
       return;
