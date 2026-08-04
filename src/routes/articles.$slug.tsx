@@ -6,8 +6,32 @@ import { toArticleHtml } from "@/lib/sanitize";
 import { ArticleCard } from "@/components/site/Cards";
 
 export const Route = createFileRoute("/articles/$slug")({
+  loader: ({ params, context }) => context.queryClient.ensureQueryData(articleQuery(params.slug)),
+  head: ({ loaderData }) => {
+    if (!loaderData) {
+      return { meta: [{ title: "مقاله در دسترس نیست | رودا" }, { name: "robots", content: "noindex" }] };
+    }
+    const title = `${loaderData.title} | رودا`;
+    const desc = loaderData.summary || "مقاله‌ای از رودا درباره مهارت‌های اداری و دیجیتال.";
+    return {
+      meta: [
+        { title },
+        { name: "description", content: desc },
+        { property: "og:title", content: title },
+        { property: "og:description", content: desc },
+        { property: "og:type", content: "article" },
+        ...(loaderData.cover_url?.startsWith("https://")
+          ? [
+              { property: "og:image", content: loaderData.cover_url },
+              { name: "twitter:image", content: loaderData.cover_url },
+            ]
+          : []),
+      ],
+    };
+  },
   component: ArticleDetail,
 });
+
 
 function ArticleDetail() {
   const { slug } = Route.useParams();
