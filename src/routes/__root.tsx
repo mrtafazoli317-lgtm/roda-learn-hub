@@ -82,16 +82,22 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "رودا | آموزش مهارت‌های اداری و دیجیتال" },
+      { title: "رودا | پلتفرم آموزشی مهارت‌های اداری و دیجیتال" },
       {
         name: "description",
         content:
-          "رودا، برند آموزشی مهارت‌های اداری، دیجیتال و مدیریت محتوا؛ پکیج‌های آموزشی و مقالات کاربردی.",
+          "رودا؛ پکیج‌های آموزشی مهارت اداری، مهارت دیجیتال و مدیریت محتوا به همراه مقالات کاربردی.",
       },
       { name: "author", content: "رودا" },
       { property: "og:site_name", content: "رودا" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "رودا | پلتفرم آموزشی مهارت‌های اداری و دیجیتال" },
+      { name: "twitter:title", content: "رودا | پلتفرم آموزشی مهارت‌های اداری و دیجیتال" },
+      { property: "og:description", content: "رودا؛ پکیج‌های آموزشی مهارت اداری، مهارت دیجیتال و مدیریت محتوا به همراه مقالات کاربردی." },
+      { name: "twitter:description", content: "رودا؛ پکیج‌های آموزشی مهارت اداری، مهارت دیجیتال و مدیریت محتوا به همراه مقالات کاربردی." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6a319f30-e4cf-4e38-ae23-0c5c6fc872da/id-preview-e92ae3b4--4dfaa0fa-9f83-461c-a445-2c503e462d41.lovable.app-1785850314268.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6a319f30-e4cf-4e38-ae23-0c5c6fc872da/id-preview-e92ae3b4--4dfaa0fa-9f83-461c-a445-2c503e462d41.lovable.app-1785850314268.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
