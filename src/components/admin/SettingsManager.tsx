@@ -13,10 +13,23 @@ const FIELDS: { key: string; label: string; type: "text" | "textarea" | "image" 
   { key: "site_name", label: "نام برند", type: "text" },
   { key: "hero_title", label: "تیتر اصلی صفحه نخست", type: "text" },
   { key: "hero_subtitle", label: "زیرعنوان صفحه نخست", type: "textarea" },
+  { key: "product_title", label: "نام دوره", type: "text" },
+  { key: "product_subtitle", label: "شعار دوره", type: "text" },
+  { key: "product_description", label: "توضیح دوره", type: "textarea" },
+  { key: "product_image_url", label: "تصویر دوره", type: "image" },
+  { key: "product_price", label: "قیمت دوره", type: "text" },
+  { key: "product_old_price", label: "قیمت قبل از تخفیف", type: "text" },
+  { key: "product_purchase_url", label: "لینک ثبت‌نام/خرید", type: "text" },
+  { key: "product_benefits", label: "مزیت‌ها (هر خط یک مورد)", type: "textarea" },
+  { key: "product_modules", label: "سرفصل‌ها (هر خط یک مورد)", type: "textarea" },
+  { key: "product_outcomes", label: "دستاوردها (هر خط یک مورد)", type: "textarea" },
   { key: "about_text", label: "متن درباره ما", type: "textarea" },
+  { key: "telegram_url", label: "لینک تلگرام", type: "text" },
+  { key: "instagram_url", label: "لینک اینستاگرام", type: "text" },
   { key: "contact_email", label: "ایمیل تماس", type: "text" },
   { key: "footer_note", label: "متن پاورقی", type: "text" },
 ];
+
 
 export function SettingsManager() {
   const qc = useQueryClient();
