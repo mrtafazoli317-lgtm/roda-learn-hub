@@ -13,25 +13,29 @@ import { Toaster } from "@/components/ui/sonner";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "@/hooks/useAuth";
+import { useRealtimeCms } from "@/hooks/useRealtimeCms";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import rodaLogo from "@/assets/roda-logo.png.asset.json";
 
+const SITE_URL = "https://roda-learn-hub.lovable.app";
+const OG_IMAGE = `${SITE_URL}${rodaLogo.url}`;
 
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h1 className="text-7xl font-black text-primary-deep">۴۰۴</h1>
+        <h2 className="mt-4 text-xl font-bold text-foreground">صفحه پیدا نشد</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          صفحه‌ای که دنبالش هستید وجود ندارد یا جابه‌جا شده است.
         </p>
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
+            بازگشت به صفحه اصلی
           </Link>
         </div>
       </div>
@@ -49,11 +53,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+        <h1 className="text-xl font-bold tracking-tight text-foreground">
+          این صفحه بارگذاری نشد
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          مشکلی پیش آمده است. می‌توانید دوباره تلاش کنید یا به صفحه اصلی برگردید.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -61,15 +65,15 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            تلاش دوباره
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-full border border-input bg-background px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            صفحه اصلی
           </a>
         </div>
       </div>
@@ -82,22 +86,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "رودا | پلتفرم آموزشی مهارت‌های اداری و دیجیتال" },
+      { title: "رودا | آموزش تخصصی ادمینی و مدیریت شبکه‌های اجتماعی" },
       {
         name: "description",
         content:
-          "رودا؛ پکیج‌های آموزشی مهارت اداری، مهارت دیجیتال و مدیریت محتوا به همراه مقالات کاربردی.",
+          "دوره جامع ادمینی رودا؛ آموزش گام‌به‌گام مدیریت پیج، تولید محتوا و پاسخگویی حرفه‌ای برای ورود سریع به بازار کار.",
       },
       { name: "author", content: "رودا" },
       { property: "og:site_name", content: "رودا" },
+      { property: "og:locale", content: "fa_IR" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:title", content: "رودا | پلتفرم آموزشی مهارت‌های اداری و دیجیتال" },
-      { name: "twitter:title", content: "رودا | پلتفرم آموزشی مهارت‌های اداری و دیجیتال" },
-      { property: "og:description", content: "رودا؛ پکیج‌های آموزشی مهارت اداری، مهارت دیجیتال و مدیریت محتوا به همراه مقالات کاربردی." },
-      { name: "twitter:description", content: "رودا؛ پکیج‌های آموزشی مهارت اداری، مهارت دیجیتال و مدیریت محتوا به همراه مقالات کاربردی." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6a319f30-e4cf-4e38-ae23-0c5c6fc872da/id-preview-e92ae3b4--4dfaa0fa-9f83-461c-a445-2c503e462d41.lovable.app-1785850314268.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/6a319f30-e4cf-4e38-ae23-0c5c6fc872da/id-preview-e92ae3b4--4dfaa0fa-9f83-461c-a445-2c503e462d41.lovable.app-1785850314268.png" },
+      { name: "theme-color", content: "#120a1f" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -105,9 +105,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;800;900&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Manrope:wght@500;700;800&display=swap",
       },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
+      { rel: "apple-touch-icon", href: "/favicon.png" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "EducationalOrganization",
+          name: "رودا",
+          url: SITE_URL,
+          logo: OG_IMAGE,
+          inLanguage: "fa-IR",
+          description:
+            "رودا؛ مرجع آموزش تخصصی ادمینی و مدیریت شبکه‌های اجتماعی به زبان فارسی.",
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -130,23 +146,30 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function SiteFrame() {
+  useRealtimeCms();
+
+  return (
+    <AuthProvider>
+      <div className="flex min-h-screen flex-col">
+        <Header />
+        <main className="flex-1">
+          {/* Required: nested routes render here. */}
+          <Outlet />
+        </main>
+        <Footer />
+      </div>
+      <Toaster position="top-center" richColors />
+    </AuthProvider>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">
-            {/* Required: nested routes render here. */}
-            <Outlet />
-          </main>
-          <Footer />
-        </div>
-        <Toaster position="top-center" richColors />
-      </AuthProvider>
+      <SiteFrame />
     </QueryClientProvider>
   );
 }
-
