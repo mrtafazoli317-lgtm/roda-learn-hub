@@ -24,9 +24,26 @@ export type Package = {
   sort_order: number;
 };
 
+export type Faq = {
+  id: string;
+  question: string;
+  answer: string;
+  sort_order: number;
+  published: boolean;
+};
+
+export const ARTICLE_CATEGORIES = [
+  "مدیریت",
+  "ادمینی",
+  "تولید محتوا",
+  "مهارت دیجیتال",
+  "کسب درآمد",
+  "بهره‌وری",
+] as const;
+
 export const settingsQuery = queryOptions({
   queryKey: ["site_settings"],
-  staleTime: 5 * 60 * 1000,
+  staleTime: 60 * 1000,
   queryFn: async () => {
     const { data, error } = await supabase.from("site_settings").select("key,value");
     if (error) throw error;
@@ -80,6 +97,27 @@ export const packagesQuery = (limit?: number) =>
       return (data ?? []) as Package[];
     },
   });
+
+export const faqQuery = queryOptions({
+  queryKey: ["faq"],
+  queryFn: async () => {
+    const { data, error } = await supabase
+      .from("faq")
+      .select("id,question,answer,sort_order,published")
+      .eq("published", true)
+      .order("sort_order", { ascending: true });
+    if (error) throw error;
+    return (data ?? []) as Faq[];
+  },
+});
+
+/** Multi-line settings values (benefits, outcomes, modules) are stored one item per line. */
+export function toList(value?: string): string[] {
+  return (value ?? "")
+    .split("\n")
+    .map((v) => v.trim())
+    .filter(Boolean);
+}
 
 export function formatDate(iso: string) {
   try {

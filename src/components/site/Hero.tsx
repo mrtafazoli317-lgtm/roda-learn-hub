@@ -1,16 +1,20 @@
 import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import logoPlaceholder from "@/assets/logo-placeholder.png";
 import { settingsQuery } from "@/lib/content";
+import rodaLogo from "@/assets/roda-logo.png.asset.json";
 
 const Scanner = lazy(() => import("@/components/Scanner"));
 
 export function Hero({
   eyebrow,
+  title,
+  subtitle,
   children,
   compact = false,
 }: {
   eyebrow?: string;
+  title?: string;
+  subtitle?: string;
   children?: ReactNode;
   compact?: boolean;
 }) {
@@ -18,16 +22,15 @@ export function Hero({
   const [showEffect, setShowEffect] = useState(false);
 
   useEffect(() => {
-    // lazy-load the WebGL effect only on capable devices, after first paint
-    const lowPower = (navigator.hardwareConcurrency ?? 8) <= 4;
+    // Identical behaviour on phone and desktop — only reduced-motion users opt out.
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (lowPower || reduced) return;
-    const id = window.setTimeout(() => setShowEffect(true), 400);
+    if (reduced) return;
+    const id = window.setTimeout(() => setShowEffect(true), 300);
     return () => window.clearTimeout(id);
   }, []);
 
   return (
-    <section className="hero-surface relative isolate overflow-hidden border-b border-border/60">
+    <section className="hero-surface relative isolate overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10">
         {showEffect && (
           <Suspense fallback={null}>
@@ -41,40 +44,42 @@ export function Hero({
               sweepWidth={1.8}
               glow={0.18}
               scanDirection="vertical"
-              brightness={0.8}
-              contrast={1.1}
-              opacity={0.35}
+              brightness={0.9}
+              contrast={1.15}
+              opacity={0.75}
               mouseInteraction
             />
           </Suspense>
         )}
       </div>
 
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-b from-transparent to-background" />
+
       <div
-        className={`mx-auto max-w-6xl px-4 text-center sm:px-6 ${compact ? "py-14 sm:py-16" : "py-20 sm:py-28"}`}
+        className={`mx-auto max-w-4xl px-4 text-center sm:px-6 ${compact ? "py-16 sm:py-20" : "py-24 sm:py-32"}`}
       >
         <img
-          src={settings?.["logo_url"] || logoPlaceholder}
+          src={settings?.["logo_url"] || rodaLogo.url}
           alt="نشان برند رودا"
-          width={96}
-          height={96}
-          className="mx-auto h-20 w-20 rounded-2xl bg-background/70 object-contain p-2 shadow-[var(--shadow-soft)] sm:h-24 sm:w-24"
+          width={128}
+          height={128}
+          className="float-slow mx-auto h-24 w-24 object-contain drop-shadow-[0_18px_40px_rgba(150,80,255,0.55)] sm:h-32 sm:w-32"
         />
 
         {eyebrow && (
-          <p className="rise-in mt-6 inline-block rounded-full bg-background/70 px-4 py-1.5 text-xs font-semibold text-primary">
+          <p className="rise-in mt-6 inline-block rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white/90 backdrop-blur">
             {eyebrow}
           </p>
         )}
 
-        <h1 className="rise-in mt-5 text-5xl font-extrabold tracking-tight text-primary-deep sm:text-6xl">
-          {settings?.["brand_title"] || "رودا"}
+        <h1 className="rise-in mt-6 text-3xl font-black leading-[1.7] text-white sm:text-5xl">
+          {title || settings?.["hero_title"] || "آموزش جامع ادمینی، از صفر تا درآمد"}
         </h1>
-        <p className="rise-in mt-3 text-base font-medium text-primary sm:text-lg">
-          {settings?.["brand_subtitle"] || "دایرکتوری و سناریو"}
+        <p className="rise-in mx-auto mt-4 max-w-2xl text-sm leading-8 text-white/70 sm:text-base">
+          {subtitle || settings?.["hero_subtitle"] || "تنها محصول رودا؛ یک دوره کامل و کاربردی."}
         </p>
 
-        {children && <div className="rise-in mt-8">{children}</div>}
+        {children && <div className="rise-in mt-9">{children}</div>}
       </div>
     </section>
   );

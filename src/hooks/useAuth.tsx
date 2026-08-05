@@ -41,6 +41,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const userId = session?.user?.id;
 
   useEffect(() => {
+    // Reset immediately on identity change so a stale admin flag is never shown.
+    setIsAdmin(false);
     if (!userId) return;
     let active = true;
     supabase
@@ -56,6 +58,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       active = false;
     };
   }, [userId]);
+
 
   const value = useMemo<AuthState>(
     () => ({

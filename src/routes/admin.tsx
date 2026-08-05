@@ -6,6 +6,7 @@ import { ArticlesManager } from "@/components/admin/ArticlesManager";
 import { PackagesManager } from "@/components/admin/PackagesManager";
 import { SettingsManager } from "@/components/admin/SettingsManager";
 import { MessagesManager } from "@/components/admin/MessagesManager";
+import { FaqManager } from "@/components/admin/FaqManager";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -53,6 +54,7 @@ function Admin() {
           <TabsTrigger value="articles">مقالات</TabsTrigger>
           <TabsTrigger value="packages">پکیج‌ها</TabsTrigger>
           <TabsTrigger value="settings">محتوای سایت</TabsTrigger>
+          <TabsTrigger value="faq">پرسش‌ها</TabsTrigger>
           <TabsTrigger value="messages">پیام‌ها</TabsTrigger>
         </TabsList>
         <TabsContent value="articles" className="mt-6">
@@ -63,6 +65,9 @@ function Admin() {
         </TabsContent>
         <TabsContent value="settings" className="mt-6">
           <SettingsManager />
+        </TabsContent>
+        <TabsContent value="faq" className="mt-6">
+          <FaqManager />
         </TabsContent>
         <TabsContent value="messages" className="mt-6">
           <MessagesManager />

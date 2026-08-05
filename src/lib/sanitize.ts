@@ -8,6 +8,7 @@ const ALLOWED_TAGS = new Set([
   "U",
   "H2",
   "H3",
+  "H4",
   "UL",
   "OL",
   "LI",
@@ -17,55 +18,78 @@ const ALLOWED_TAGS = new Set([
   "DIV",
   "SPAN",
   "FIGURE",
+  "FIGCAPTION",
+  "HR",
 ]);
 
+// `A` intentionally omits rel/target — they are always re-added safely below.
 const ALLOWED_ATTRS: Record<string, string[]> = {
-  A: ["href", "target", "rel"],
-  IMG: ["src", "alt", "loading"],
+  A: ["href"],
+  IMG: ["src", "alt"],
 };
+
+const VOID_TAGS = new Set(["BR", "IMG", "HR"]);
 
 function isSafeUrl(url: string) {
   const v = url.trim().toLowerCase();
   return (
-    v.startsWith("http://") || v.startsWith("https://") || v.startsWith("/") || v.startsWith("data:image/")
+    v.startsWith("http://") ||
+    v.startsWith("https://") ||
+    v.startsWith("/") ||
+    v.startsWith("data:image/")
   );
 }
 
-/** Minimal allow-list sanitizer for admin-authored article HTML. */
-export function sanitizeHtml(html: string): string {
-  if (typeof window === "undefined" || !html) return "";
-  const doc = new DOMParser().parseFromString(`<div>${html}</div>`, "text/html");
-  const root = doc.body.firstElementChild;
-  if (!root) return "";
+function escapeAttr(v: string) {
+  return v.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
 
-  const walk = (node: Element) => {
-    [...node.children].forEach((child) => {
-      if (!ALLOWED_TAGS.has(child.tagName)) {
-        child.replaceWith(...Array.from(child.childNodes));
-        return;
+/**
+ * Isomorphic allow-list sanitizer for admin-authored article HTML.
+ * Runs identically on the server (SSR/SEO) and in the browser — no DOM required.
+ */
+export function sanitizeHtml(html: string): string {
+  if (!html) return "";
+
+  let out = html
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<\s*(script|style|iframe|object|embed|form|svg|math)[\s\S]*?<\s*\/\s*\1\s*>/gi, "")
+    .replace(/<\s*\/?\s*(script|style|iframe|object|embed|form|svg|math)\b[^>]*>/gi, "");
+
+  out = out.replace(
+    /<\s*(\/?)\s*([a-zA-Z][a-zA-Z0-9]*)((?:"[^"]*"|'[^']*'|[^"'>])*)\/?\s*>/g,
+    (_match, close: string, rawTag: string, rawAttrs: string) => {
+      const name = rawTag.toUpperCase();
+      if (!ALLOWED_TAGS.has(name)) return "";
+      const tag = rawTag.toLowerCase();
+      if (close) return VOID_TAGS.has(name) ? "" : `</${tag}>`;
+
+      const allowed = ALLOWED_ATTRS[name] ?? [];
+      const kept: string[] = [];
+      const attrRe = /([a-zA-Z:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g;
+      let attr: RegExpExecArray | null;
+      while ((attr = attrRe.exec(rawAttrs)) !== null) {
+        const key = attr[1]!.toLowerCase();
+        const value = attr[2] ?? attr[3] ?? "";
+        if (!allowed.includes(key)) continue;
+        if ((key === "href" || key === "src") && !isSafeUrl(value)) continue;
+        kept.push(`${key}="${escapeAttr(value)}"`);
       }
-      const allowed = ALLOWED_ATTRS[child.tagName] ?? [];
-      [...child.attributes].forEach((attr) => {
-        if (!allowed.includes(attr.name.toLowerCase())) child.removeAttribute(attr.name);
-      });
-      const src = child.getAttribute("src");
-      if (src && !isSafeUrl(src)) child.removeAttribute("src");
-      const href = child.getAttribute("href");
-      if (href && !isSafeUrl(href)) child.removeAttribute("href");
-      if (child.tagName === "A") {
-        child.setAttribute("rel", "noopener noreferrer");
-        child.setAttribute("target", "_blank");
-      }
-      if (child.tagName === "IMG") child.setAttribute("loading", "lazy");
-      walk(child);
-    });
-  };
-  walk(root);
-  return root.innerHTML;
+
+      if (name === "A") kept.push('rel="noopener noreferrer"', 'target="_blank"');
+      if (name === "IMG") kept.push('loading="lazy"', 'decoding="async"');
+
+      const attrs = kept.length ? ` ${kept.join(" ")}` : "";
+      return VOID_TAGS.has(name) ? `<${tag}${attrs} />` : `<${tag}${attrs}>`;
+    },
+  );
+
+  return out;
 }
 
 /** Renders plain text (no tags) as paragraphs, otherwise sanitized HTML. */
 export function toArticleHtml(content: string): string {
+  if (!content) return "";
   const looksLikeHtml = /<\/?[a-z][\s\S]*>/i.test(content);
   if (!looksLikeHtml) {
     return content
