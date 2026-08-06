@@ -1,6 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, BadgeCheck, CheckCircle2, GraduationCap, Sparkles, Target } from "lucide-react";
+import {
+  ArrowLeft,
+  BadgeCheck,
+  BookOpen,
+  CheckCircle2,
+  GraduationCap,
+  LifeBuoy,
+  MessagesSquare,
+  Sparkles,
+  Target,
+  Users,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -188,18 +199,69 @@ export function ProductFaq() {
   );
 }
 
+export function ProductDetails() {
+  const { data: settings } = useQuery(settingsQuery);
+  const blocks = [
+    {
+      title: "محتوای دوره",
+      icon: BookOpen,
+      items: toList(settings?.["product_content"]),
+    },
+    {
+      title: "خدمات پس از خرید",
+      icon: LifeBuoy,
+      items: toList(settings?.["product_after_sales"]),
+    },
+    {
+      title: "مناسب برای",
+      icon: Users,
+      items: toList(settings?.["product_audience"]),
+    },
+  ].filter((b) => b.items.length > 0);
+
+  if (!blocks.length) return null;
+
+  return (
+    <section className="border-y border-border bg-muted/40">
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+        <div className="grid gap-5 md:grid-cols-3">
+          {blocks.map((b) => (
+            <div key={b.title} className="surface-card h-full p-6">
+              <div className="flex items-center gap-2">
+                <b.icon className="size-5 shrink-0 text-primary" />
+                <h2 className="text-base font-black text-primary-deep">{b.title}</h2>
+              </div>
+              <ul className="mt-4 space-y-2.5">
+                {b.items.map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-sm leading-7 text-foreground/85">
+                    <CheckCircle2 className="mt-1 size-4 shrink-0 text-primary" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function TrustStrip() {
   const items = [
-    { icon: BadgeCheck, title: "محتوای کاربردی", desc: "بدون تئوری خسته‌کننده، مبتنی بر پروژه واقعی" },
-    { icon: GraduationCap, title: "مناسب مبتدی‌ها", desc: "از صفر شروع می‌کنید، بدون پیش‌نیاز فنی" },
-    { icon: Sparkles, title: "پشتیبانی رودا", desc: "پاسخگویی به سؤال‌ها در طول مسیر یادگیری" },
+    { icon: LifeBuoy, title: "پشتیبانی یک‌ساله", desc: "یک سال پاسخگویی به سؤال‌های شما" },
+    { icon: Sparkles, title: "آپدیت رایگان", desc: "به‌روزرسانی محتوای دوره بدون هزینه" },
+    { icon: BadgeCheck, title: "آموزش کاربردی", desc: "بدون تئوری خسته‌کننده، مبتنی بر تجربه" },
+    { icon: MessagesSquare, title: "نمونه مکالمات واقعی", desc: "۳۰ تا ۵۰ مکالمه آماده و قابل استفاده" },
+    { icon: GraduationCap, title: "آموزش گام‌به‌گام", desc: "از صفر، بدون پیش‌نیاز فنی" },
+    { icon: Target, title: "مناسب بازار کار", desc: "مهارتی که همین امروز درآمدزاست" },
   ];
 
   return (
-    <section className="mx-auto -mt-10 max-w-6xl px-4 sm:px-6">
-      <div className="grid gap-4 sm:grid-cols-3">
+    <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-16">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((i) => (
-          <div key={i.title} className="surface-card flex items-start gap-3 p-5">
+          <div key={i.title} className="surface-card flex items-start gap-3 p-5 transition-transform hover:-translate-y-0.5">
             <i.icon className="mt-0.5 size-6 shrink-0 text-primary" />
             <div className="min-w-0">
               <p className="text-sm font-bold text-primary-deep">{i.title}</p>

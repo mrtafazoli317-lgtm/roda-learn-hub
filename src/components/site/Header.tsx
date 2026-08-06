@@ -9,10 +9,10 @@ import rodaLogo from "@/assets/roda-logo.png.asset.json";
 
 const nav = [
   { to: "/", label: "خانه" },
-  { to: "/packages", label: "دوره ادمینی" },
+  { to: "/packages", label: "دوره آموزشی" },
   { to: "/articles", label: "مقالات" },
-  { to: "/about", label: "درباره رودا" },
-  { to: "/contact", label: "تماس" },
+  { to: "/about", label: "درباره ما" },
+  { to: "/contact", label: "تماس با ما" },
 ] as const;
 
 export function Header() {
@@ -38,7 +38,7 @@ export function Header() {
               {settings?.["site_name"] || "رودا"}
             </span>
             <span className="block truncate text-[11px] text-muted-foreground">
-              {settings?.["product_subtitle"] || "آموزش تخصصی ادمینی"}
+              {settings?.["site_tagline"] || "دایرکتوری و سناریو"}
             </span>
           </span>
         </Link>

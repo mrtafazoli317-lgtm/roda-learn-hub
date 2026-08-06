@@ -4,6 +4,7 @@ import { Hero } from "@/components/site/Hero";
 import { settingsQuery } from "@/lib/content";
 import {
   ProductCta,
+  ProductDetails,
   ProductFaq,
   ProductModules,
   ProductOutcomes,
@@ -48,6 +49,7 @@ function Packages() {
 
       <ProductOverview />
       <ProductModules />
+      <ProductDetails />
       <ProductOutcomes />
       <ProductFaq />
 

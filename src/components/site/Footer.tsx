@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Send, Instagram, Mail } from "lucide-react";
+import { Send, Instagram, Mail, MessageCircle } from "lucide-react";
 import { settingsQuery } from "@/lib/content";
 import rodaLogo from "@/assets/roda-logo.png.asset.json";
 
@@ -8,6 +8,7 @@ export function Footer() {
   const { data: settings } = useQuery(settingsQuery);
   const telegram = settings?.["telegram_url"];
   const instagram = settings?.["instagram_url"];
+  const rubika = settings?.["rubika_url"];
   const email = settings?.["contact_email"];
 
   return (
@@ -54,6 +55,17 @@ export function Footer() {
                 <Instagram className="size-5" />
               </a>
             )}
+            {rubika && (
+              <a
+                href={rubika}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="روبیکا رودا"
+                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-primary-soft text-primary-deep transition-colors hover:bg-primary hover:text-primary-foreground"
+              >
+                <MessageCircle className="size-5" />
+              </a>
+            )}
             {email && (
               <a
                 href={`mailto:${email}`}
@@ -71,7 +83,7 @@ export function Footer() {
           <ul className="space-y-2.5 text-sm text-muted-foreground">
             <li>
               <Link to="/packages" className="hover:text-primary">
-                دوره ادمینی
+                دوره آموزشی
               </Link>
             </li>
             <li>
