@@ -7,6 +7,7 @@ import { PackagesManager } from "@/components/admin/PackagesManager";
 import { SettingsManager } from "@/components/admin/SettingsManager";
 import { MessagesManager } from "@/components/admin/MessagesManager";
 import { FaqManager } from "@/components/admin/FaqManager";
+import { ChatManager } from "@/components/admin/ChatManager";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -56,6 +57,7 @@ function Admin() {
           <TabsTrigger value="settings">محتوای سایت</TabsTrigger>
           <TabsTrigger value="faq">پرسش‌ها</TabsTrigger>
           <TabsTrigger value="messages">پیام‌ها</TabsTrigger>
+          <TabsTrigger value="chat">پشتیبانی</TabsTrigger>
         </TabsList>
         <TabsContent value="articles" className="mt-6">
           <ArticlesManager />
@@ -71,6 +73,9 @@ function Admin() {
         </TabsContent>
         <TabsContent value="messages" className="mt-6">
           <MessagesManager />
+        </TabsContent>
+        <TabsContent value="chat" className="mt-6">
+          <ChatManager />
         </TabsContent>
       </Tabs>
     </section>

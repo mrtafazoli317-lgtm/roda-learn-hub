@@ -85,6 +85,21 @@ function AuthPage() {
     navigate({ to: "/profile" });
   }
 
+  async function forgotPassword() {
+    const parsed = z.string().trim().email().safeParse(email);
+    if (!parsed.success) {
+      toast.error("ابتدا ایمیل خود را وارد کنید");
+      return;
+    }
+    setBusy(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(parsed.data, {
+      redirectTo: `${window.location.origin}/reset-password`,
+    });
+    setBusy(false);
+    if (error) toast.error("ارسال ایمیل بازیابی ناموفق بود");
+    else toast.success("لینک بازیابی رمز عبور به ایمیل شما ارسال شد");
+  }
+
   return (
     <section className="mx-auto max-w-md px-4 py-16 sm:px-6">
       <h1 className="text-center text-2xl font-extrabold text-primary-deep">حساب کاربری رودا</h1>
@@ -112,6 +127,13 @@ function AuthPage() {
               <Button type="submit" disabled={busy} className="w-full rounded-xl">
                 {busy ? "..." : "ورود"}
               </Button>
+              <button
+                type="button"
+                onClick={forgotPassword}
+                className="w-full text-center text-xs font-semibold text-primary hover:underline"
+              >
+                رمز عبور را فراموش کرده‌اید؟
+              </button>
             </form>
           </TabsContent>
 

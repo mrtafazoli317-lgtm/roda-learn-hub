@@ -36,9 +36,9 @@ export const ARTICLE_CATEGORIES = [
   "مدیریت",
   "ادمینی",
   "تولید محتوا",
-  "مهارت دیجیتال",
-  "کسب درآمد",
-  "بهره‌وری",
+  "فروش",
+  "دایرکتوری",
+  "ارتباط با مشتری",
 ] as const;
 
 export const settingsQuery = queryOptions({

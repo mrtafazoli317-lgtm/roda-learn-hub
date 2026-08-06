@@ -11,6 +11,7 @@ import { ImageField } from "@/components/admin/ImageField";
 const FIELDS: { key: string; label: string; type: "text" | "textarea" | "image" }[] = [
   { key: "logo_url", label: "لوگوی سایت", type: "image" },
   { key: "site_name", label: "نام برند", type: "text" },
+  { key: "site_tagline", label: "زیرعنوان کنار لوگو", type: "text" },
   { key: "hero_title", label: "تیتر اصلی صفحه نخست", type: "text" },
   { key: "hero_subtitle", label: "زیرعنوان صفحه نخست", type: "textarea" },
   { key: "product_title", label: "نام دوره", type: "text" },
@@ -20,14 +21,25 @@ const FIELDS: { key: string; label: string; type: "text" | "textarea" | "image" 
   { key: "product_price", label: "قیمت دوره", type: "text" },
   { key: "product_old_price", label: "قیمت قبل از تخفیف", type: "text" },
   { key: "product_purchase_url", label: "لینک ثبت‌نام/خرید", type: "text" },
+  { key: "cta_primary_label", label: "متن دکمه اصلی", type: "text" },
+  { key: "cta_secondary_label", label: "متن دکمه دوم", type: "text" },
   { key: "product_benefits", label: "مزیت‌ها (هر خط یک مورد)", type: "textarea" },
   { key: "product_modules", label: "سرفصل‌ها (هر خط یک مورد)", type: "textarea" },
+  { key: "product_content", label: "محتوای دوره (هر خط یک مورد)", type: "textarea" },
+  { key: "product_after_sales", label: "خدمات پس از خرید (هر خط یک مورد)", type: "textarea" },
+  { key: "product_audience", label: "مناسب برای (هر خط یک مورد)", type: "textarea" },
   { key: "product_outcomes", label: "دستاوردها (هر خط یک مورد)", type: "textarea" },
   { key: "about_text", label: "متن درباره ما", type: "textarea" },
   { key: "telegram_url", label: "لینک تلگرام", type: "text" },
   { key: "instagram_url", label: "لینک اینستاگرام", type: "text" },
+  { key: "rubika_url", label: "لینک روبیکا", type: "text" },
   { key: "contact_email", label: "ایمیل تماس", type: "text" },
   { key: "footer_note", label: "متن پاورقی", type: "text" },
+  { key: "support_intro", label: "پیام خوش‌آمد پشتیبانی", type: "text" },
+  { key: "seo_title", label: "عنوان سئو", type: "text" },
+  { key: "seo_description", label: "توضیحات سئو", type: "textarea" },
+  { key: "seo_keywords", label: "کلمات کلیدی سئو", type: "textarea" },
+  { key: "seo_og_image", label: "تصویر اشتراک‌گذاری (OG)", type: "image" },
 ];
 
 

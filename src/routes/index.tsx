@@ -6,6 +6,7 @@ import { articlesQuery, settingsQuery } from "@/lib/content";
 import { ContactForm } from "@/components/site/ContactForm";
 import {
   ProductCta,
+  ProductDetails,
   ProductFaq,
   ProductModules,
   ProductOutcomes,
@@ -15,9 +16,9 @@ import {
 import rodaLogo from "@/assets/roda-logo.png.asset.json";
 
 const SITE_URL = "https://roda-learn-hub.lovable.app";
-const TITLE = "رودا | دوره جامع آموزش ادمینی و مدیریت شبکه‌های اجتماعی";
+const TITLE = "رودا | دوره آموزشی دایرکتوری و پاسخگویی حرفه‌ای";
 const DESC =
-  "دوره جامع ادمینی رودا؛ آموزش پروژه‌محور مدیریت پیج، تولید محتوا و پاسخگویی حرفه‌ای برای ورود به بازار کار.";
+  "دوره آموزشی دایرکتوری رودا؛ آموزش پاسخگویی حرفه‌ای، روانشناسی مشتری و فروش در دایرکت به‌همراه نمونه مکالمه، چک‌لیست و پشتیبانی یک‌ساله.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -54,7 +55,7 @@ function Index() {
 
   return (
     <>
-      <Hero eyebrow="تنها محصول رودا • دوره ادمینی">
+      <Hero eyebrow="تنها محصول رودا • دوره آموزشی دایرکتوری">
         <ProductCta dark />
       </Hero>
 
@@ -62,19 +63,19 @@ function Index() {
 
       <ProductOverview />
       <ProductModules />
+      <ProductDetails />
       <ProductOutcomes />
 
-      <section className="border-y border-border bg-muted/40">
-        <div className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
-          <h2 className="text-2xl font-black text-primary-deep sm:text-3xl">درباره رودا</h2>
-          <p className="mt-4 text-sm leading-8 text-muted-foreground sm:text-base">
-            {settings?.["about_text"] ||
-              "رودا یک برند آموزشی مدرن است که روی آموزش تخصصی ادمینی تمرکز دارد."}
-          </p>
-        </div>
+      <section className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6">
+        <h2 className="text-2xl font-black text-primary-deep sm:text-3xl">درباره رودا</h2>
+        <p className="mt-4 text-sm leading-8 text-muted-foreground sm:text-base">
+          {settings?.["about_text"] ||
+            "رودا یک برند آموزشی مدرن است که روی آموزش تخصصی دایرکتوری و پاسخگویی حرفه‌ای تمرکز دارد."}
+        </p>
       </section>
 
       <ProductFaq />
+
 
       {(articles ?? []).length > 0 && (
         <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6">

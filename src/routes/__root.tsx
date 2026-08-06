@@ -16,6 +16,7 @@ import { AuthProvider } from "@/hooks/useAuth";
 import { useRealtimeCms } from "@/hooks/useRealtimeCms";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { SupportChat } from "@/components/site/SupportChat";
 import rodaLogo from "@/assets/roda-logo.png.asset.json";
 
 const SITE_URL = "https://roda-learn-hub.lovable.app";
@@ -159,6 +160,7 @@ function SiteFrame() {
         </main>
         <Footer />
       </div>
+      <SupportChat />
       <Toaster position="top-center" richColors />
     </AuthProvider>
   );
