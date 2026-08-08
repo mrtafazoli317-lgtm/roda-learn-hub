@@ -5,6 +5,7 @@ import { Menu, X, Sparkles } from "lucide-react";
 import { settingsQuery } from "@/lib/content";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
+import { SocialIcons } from "@/components/site/SocialLinks";
 import rodaLogo from "@/assets/roda-logo.png.asset.json";
 
 const nav = [
@@ -113,6 +114,7 @@ export function Header() {
             >
               {user ? "حساب من" : "ورود / ثبت‌نام"}
             </Link>
+            <SocialIcons className="mt-2 border-t border-border pt-3" />
           </nav>
         </div>
       )}
