@@ -1,15 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Send, Instagram, Mail, MessageCircle } from "lucide-react";
 import { settingsQuery } from "@/lib/content";
+import { SocialIcons } from "@/components/site/SocialLinks";
 import rodaLogo from "@/assets/roda-logo.png.asset.json";
 
 export function Footer() {
   const { data: settings } = useQuery(settingsQuery);
-  const telegram = settings?.["telegram_url"];
-  const instagram = settings?.["instagram_url"];
-  const rubika = settings?.["rubika_url"];
-  const email = settings?.["contact_email"];
 
   return (
     <footer className="mt-24 border-t border-border bg-muted/40">
@@ -32,50 +28,7 @@ export function Footer() {
               "برند آموزشی رودا؛ آموزش تخصصی ادمینی به زبان ساده و کاربردی."}
           </p>
 
-          <div className="mt-5 flex items-center gap-2">
-            {telegram && (
-              <a
-                href={telegram}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="تلگرام رودا"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-primary-soft text-primary-deep transition-colors hover:bg-primary hover:text-primary-foreground"
-              >
-                <Send className="size-5" />
-              </a>
-            )}
-            {instagram && (
-              <a
-                href={instagram}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="اینستاگرام رودا"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-primary-soft text-primary-deep transition-colors hover:bg-primary hover:text-primary-foreground"
-              >
-                <Instagram className="size-5" />
-              </a>
-            )}
-            {rubika && (
-              <a
-                href={rubika}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="روبیکا رودا"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-primary-soft text-primary-deep transition-colors hover:bg-primary hover:text-primary-foreground"
-              >
-                <MessageCircle className="size-5" />
-              </a>
-            )}
-            {email && (
-              <a
-                href={`mailto:${email}`}
-                aria-label="ایمیل رودا"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl bg-primary-soft text-primary-deep transition-colors hover:bg-primary hover:text-primary-foreground"
-              >
-                <Mail className="size-5" />
-              </a>
-            )}
-          </div>
+          <SocialIcons className="mt-5" />
         </div>
 
         <div>
