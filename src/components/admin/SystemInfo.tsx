@@ -2,8 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { Database, HardDrive, KeyRound, Radio, CheckCircle2, XCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-const PROJECT_URL = import.meta.env.VITE_SUPABASE_URL as string;
-const PROJECT_ID = import.meta.env.VITE_SUPABASE_PROJECT_ID as string;
+const PROJECT_URL = import.meta.env["VITE_SUPABASE_URL"] as string;
+const PROJECT_ID = import.meta.env["VITE_SUPABASE_PROJECT_ID"] as string;
+
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
