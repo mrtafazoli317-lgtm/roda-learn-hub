@@ -8,6 +8,8 @@ import { SettingsManager } from "@/components/admin/SettingsManager";
 import { MessagesManager } from "@/components/admin/MessagesManager";
 import { FaqManager } from "@/components/admin/FaqManager";
 import { ChatManager } from "@/components/admin/ChatManager";
+import { MediaManager } from "@/components/admin/MediaManager";
+import { SystemInfo } from "@/components/admin/SystemInfo";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -58,6 +60,8 @@ function Admin() {
           <TabsTrigger value="faq">پرسش‌ها</TabsTrigger>
           <TabsTrigger value="messages">پیام‌ها</TabsTrigger>
           <TabsTrigger value="chat">پشتیبانی</TabsTrigger>
+          <TabsTrigger value="media">رسانه</TabsTrigger>
+          <TabsTrigger value="system">اطلاعات سیستم</TabsTrigger>
         </TabsList>
         <TabsContent value="articles" className="mt-6">
           <ArticlesManager />
@@ -76,6 +80,12 @@ function Admin() {
         </TabsContent>
         <TabsContent value="chat" className="mt-6">
           <ChatManager />
+        </TabsContent>
+        <TabsContent value="media" className="mt-6">
+          <MediaManager />
+        </TabsContent>
+        <TabsContent value="system" className="mt-6">
+          <SystemInfo />
         </TabsContent>
       </Tabs>
     </section>
