@@ -1,9 +1,10 @@
 import { useState, type ImgHTMLAttributes, type ReactNode } from "react";
 
 type Props = Omit<ImgHTMLAttributes<HTMLImageElement>, "src"> & {
-  src?: string | null;
-  fallback?: ReactNode;
+  src?: string | null | undefined;
+  fallback?: ReactNode | undefined;
 };
+
 
 /**
  * Image with one automatic retry (network hiccups) and a graceful fallback
