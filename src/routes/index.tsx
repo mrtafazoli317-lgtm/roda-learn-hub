@@ -4,6 +4,8 @@ import { Hero } from "@/components/site/Hero";
 import { ArticleCard, SectionHead } from "@/components/site/Cards";
 import { articlesQuery, settingsQuery } from "@/lib/content";
 import { ContactForm } from "@/components/site/ContactForm";
+import { Credits } from "@/components/site/Credits";
+
 import {
   ProductCta,
   ProductDetails,
@@ -106,6 +108,9 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <Credits />
     </>
   );
 }
+
