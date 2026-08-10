@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { settingsQuery } from "@/lib/content";
 import rodaLogo from "@/assets/roda-logo.png.asset.json";
+import { SmartImage } from "@/components/site/SmartImage";
 
 const Scanner = lazy(() => import("@/components/Scanner"));
 
@@ -58,13 +59,17 @@ export function Hero({
       <div
         className={`mx-auto max-w-4xl px-4 text-center sm:px-6 ${compact ? "py-16 sm:py-20" : "py-24 sm:py-32"}`}
       >
-        <img
+        <SmartImage
           src={settings?.["logo_url"] || rodaLogo.url}
           alt="نشان برند رودا"
           width={128}
           height={128}
           className="float-slow mx-auto h-24 w-24 object-contain drop-shadow-[0_18px_40px_rgba(150,80,255,0.55)] sm:h-32 sm:w-32"
+          fallback={
+            <p className="mx-auto text-4xl font-black text-white sm:text-5xl">رودا</p>
+          }
         />
+
 
         {eyebrow && (
           <p className="rise-in mt-6 inline-block rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-semibold text-white/90 backdrop-blur">

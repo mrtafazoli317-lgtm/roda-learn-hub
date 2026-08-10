@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
+import { SmartImage } from "@/components/site/SmartImage";
 import {
   ArrowLeft,
   BadgeCheck,
@@ -65,19 +66,19 @@ export function ProductOverview() {
         <div className="relative">
           <div className="soft-grid absolute -inset-6 -z-10 rounded-[2.5rem] opacity-70" />
           <div className="surface-card overflow-hidden">
-            {image ? (
-              <img
-                src={image}
-                alt={settings?.["product_title"] || "دوره جامع ادمینی رودا"}
-                loading="lazy"
-                className="aspect-[4/3] w-full object-cover"
-              />
-            ) : (
-              <div className="flex aspect-[4/3] w-full items-center justify-center bg-primary-soft">
-                <GraduationCap className="size-20 text-primary/40" />
-              </div>
-            )}
+            <SmartImage
+              src={image}
+              alt={settings?.["product_title"] || "دوره جامع ادمینی رودا"}
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover"
+              fallback={
+                <div className="flex aspect-[4/3] w-full items-center justify-center bg-primary-soft">
+                  <GraduationCap className="size-20 text-primary/40" />
+                </div>
+              }
+            />
           </div>
+
         </div>
 
         <div>

@@ -4,6 +4,8 @@ import { Hero } from "@/components/site/Hero";
 import { ArticleCard, SectionHead } from "@/components/site/Cards";
 import { articlesQuery, settingsQuery } from "@/lib/content";
 import { ContactForm } from "@/components/site/ContactForm";
+import { Credits } from "@/components/site/Credits";
+
 import {
   ProductCta,
   ProductDetails,
@@ -77,6 +79,8 @@ function Index() {
       <ProductFaq />
 
 
+
+
       {(articles ?? []).length > 0 && (
         <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
           <SectionHead
@@ -104,6 +108,9 @@ function Index() {
           </div>
         </div>
       </section>
+
+      <Credits />
     </>
   );
 }
+
