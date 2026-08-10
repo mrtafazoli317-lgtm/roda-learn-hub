@@ -44,19 +44,19 @@ export function PackageCard({ pkg }: { pkg: Package }) {
   return (
     <article className="surface-card flex flex-col overflow-hidden">
       <div className="aspect-[4/3] w-full overflow-hidden bg-primary-soft">
-        {pkg.image_url ? (
-          <img
-            src={pkg.image_url}
-            alt={pkg.title}
-            loading="lazy"
-            className="h-full w-full object-cover"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-3xl font-black text-primary/25">
-            رودا
-          </div>
-        )}
+        <SmartImage
+          src={pkg.image_url}
+          alt={pkg.title}
+          loading="lazy"
+          className="h-full w-full object-cover"
+          fallback={
+            <div className="flex h-full w-full items-center justify-center text-3xl font-black text-primary/25">
+              رودا
+            </div>
+          }
+        />
       </div>
+
       <div className="flex flex-1 flex-col p-5">
         <h3 className="text-base font-bold text-primary-deep">{pkg.title}</h3>
         <p className="mt-2 flex-1 text-sm leading-7 text-muted-foreground">{pkg.description}</p>
