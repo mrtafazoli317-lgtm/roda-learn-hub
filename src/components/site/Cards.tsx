@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { formatDate, type Article, type Package } from "@/lib/content";
 import { Button } from "@/components/ui/button";
+import { SmartImage } from "@/components/site/SmartImage";
+
 
 export function ArticleCard({ article }: { article: Article }) {
   return (
@@ -11,19 +13,19 @@ export function ArticleCard({ article }: { article: Article }) {
       className="surface-card group flex flex-col overflow-hidden"
     >
       <div className="aspect-[16/9] w-full overflow-hidden bg-primary-soft">
-        {article.cover_url ? (
-          <img
-            src={article.cover_url}
-            alt={article.title}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-3xl font-black text-primary/25">
-            رودا
-          </div>
-        )}
+        <SmartImage
+          src={article.cover_url}
+          alt={article.title}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          fallback={
+            <div className="flex h-full w-full items-center justify-center text-3xl font-black text-primary/25">
+              رودا
+            </div>
+          }
+        />
       </div>
+
       <div className="flex flex-1 flex-col p-5">
         <span className="w-fit rounded-full bg-primary-soft px-3 py-1 text-[11px] font-semibold text-primary-deep">
           {article.category}
