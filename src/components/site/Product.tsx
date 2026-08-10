@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
+import { SmartImage } from "@/components/site/SmartImage";
 import {
   ArrowLeft,
   BadgeCheck,

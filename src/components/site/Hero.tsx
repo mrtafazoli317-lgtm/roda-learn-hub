@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { settingsQuery } from "@/lib/content";
 import rodaLogo from "@/assets/roda-logo.png.asset.json";
+import { SmartImage } from "@/components/site/SmartImage";
 
 const Scanner = lazy(() => import("@/components/Scanner"));
 
