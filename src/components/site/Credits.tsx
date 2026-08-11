@@ -32,8 +32,8 @@ export function Credits() {
             <span className="inline-flex items-center gap-2 rounded-full bg-primary-soft px-4 py-1.5 text-xs font-bold text-primary-deep">
               <Sparkles className="size-4" /> طراح و برنامه‌نویس
             </span>
-            <h2 id="credits-title" className="mt-4 text-2xl font-black text-primary-deep sm:text-3xl">
-              محمد تفضلی
+            <h2 id="credits-title" className="mt-4 text-3xl font-black text-primary-deep sm:text-4xl">
+              طراح این سایت با مجموعه Rovix
             </h2>
             <p className="mt-3 text-sm leading-8 text-muted-foreground">
               بهترین برای طراحی و برنامه‌نویسی
