@@ -70,8 +70,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           >
             تلاش دوباره
           </button>
-          
-            href="/"
+           
+            <a href="/"
             className="inline-flex items-center justify-center rounded-full border border-input bg-background px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-accent"
           >
             صفحه اصلی
