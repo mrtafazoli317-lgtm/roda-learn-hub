@@ -29,6 +29,21 @@ export function Footer() {
           </p>
 
           <SocialIcons className="mt-5" />
+
+          
+            referrerPolicy="origin"
+            target="_blank"
+            href="https://trustseal.enamad.ir/?id=7353195&Code=TiuGteVQ1ZURhfBznQyLvuiFZ6KJsMDT"
+            className="mt-5 inline-block"
+          >
+            <img
+              referrerPolicy="origin"
+              src="https://trustseal.enamad.ir/logo.aspx?id=7353195&Code=TiuGteVQ1ZURhfBznQyLvuiFZ6KJsMDT"
+              alt="نماد اعتماد الکترونیکی"
+              style={{ cursor: "pointer" }}
+              code="TiuGteVQ1ZURhfBznQyLvuiFZ6KJsMDT"
+            />
+          </a>
         </div>
 
         <div>
