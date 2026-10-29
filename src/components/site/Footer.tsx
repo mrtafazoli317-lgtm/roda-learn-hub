@@ -13,6 +13,7 @@ export function Footer() {
     "فارس، شیراز، بخش مرکزی، محله سردخانه، کوچه ۱۷ نیرو، کوچه ۱ فرصت شیرازی، آراد، پلاک ۲۰، طبقه ۲، واحد ۹";
   const postalCode = settings?.["contact_postal_code"] || "۷۱۵۷۸۱۱۴۸۱";
   const phone = settings?.["contact_phone"] || "۰۷۱۳۷۲۰۹۲۱۵";
+  const mobile = settings?.["contact_mobile"] || "۰۹۳۰۰۱۷۹۰۶۹";
   const email = settings?.["contact_email"] || "roda.directory@gmail.com";
 
   return (
@@ -110,6 +111,12 @@ export function Footer() {
               <Phone className="h-4 w-4 shrink-0 text-primary" />
               <a href={`tel:${phone}`} className="hover:text-primary" dir="ltr">
                 {phone}
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Phone className="h-4 w-4 shrink-0 text-primary" />
+              <a href={`tel:${mobile}`} className="hover:text-primary" dir="ltr">
+                {mobile}
               </a>
             </li>
             <li className="flex items-center gap-2">
