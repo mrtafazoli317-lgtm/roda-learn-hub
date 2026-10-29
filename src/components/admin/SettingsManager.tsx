@@ -44,6 +44,7 @@ const FIELDS: { key: string; label: string; type: "text" | "textarea" | "image" 
   { key: "contact_address", label: "نشانی کامل (اینماد)", type: "textarea" },
   { key: "contact_postal_code", label: "کدپستی", type: "text" },
   { key: "contact_phone", label: "تلفن ثابت", type: "text" },
+  { key: "contact_mobile", label: "شماره موبایل", type: "text" },
 
   { key: "footer_note", label: "متن پاورقی", type: "text" },
   { key: "support_intro", label: "پیام خوش‌آمد پشتیبانی", type: "text" },

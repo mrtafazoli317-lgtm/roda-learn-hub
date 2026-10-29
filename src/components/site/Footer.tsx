@@ -13,6 +13,7 @@ export function Footer() {
     "فارس، شیراز، بخش مرکزی، محله سردخانه، کوچه ۱۷ نیرو، کوچه ۱ فرصت شیرازی، آراد، پلاک ۲۰، طبقه ۲، واحد ۹";
   const postalCode = settings?.["contact_postal_code"] || "۷۱۵۷۸۱۱۴۸۱";
   const phone = settings?.["contact_phone"] || "۰۷۱۳۷۲۰۹۲۱۵";
+  const mobile = settings?.["contact_mobile"] || "۰۹۳۰۰۱۷۹۰۶۹";
   const email = settings?.["contact_email"] || "roda.directory@gmail.com";
 
   return (
