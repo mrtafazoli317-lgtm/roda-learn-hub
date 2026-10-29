@@ -41,6 +41,9 @@ const FIELDS: { key: string; label: string; type: "text" | "textarea" | "image" 
   { key: "rubika_url", label: "لینک روبیکا", type: "text" },
   { key: "rubika_channel_url", label: "لینک کانال روبیکا", type: "text" },
   { key: "contact_email", label: "ایمیل تماس", type: "text" },
+  { key: "contact_address", label: "نشانی کامل (اینماد)", type: "textarea" },
+  { key: "contact_postal_code", label: "کدپستی", type: "text" },
+  { key: "contact_phone", label: "تلفن ثابت", type: "text" },
 
   { key: "footer_note", label: "متن پاورقی", type: "text" },
   { key: "support_intro", label: "پیام خوش‌آمد پشتیبانی", type: "text" },
